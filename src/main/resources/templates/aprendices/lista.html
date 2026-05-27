@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="es" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8"/>
+    <title>Lista de Aprendices</title>
+    <style>
+        body { font-family: Arial, sans-serif; margin: 30px; background: #f5f5f5; }
+        h1 { color: #2c3e50; }
+        table { width: 100%; border-collapse: collapse; background: white; border-radius: 8px; overflow: hidden; }
+        th { background: #2980b9; color: white; padding: 12px; text-align: left; }
+        td { padding: 10px 12px; border-bottom: 1px solid #eee; }
+        tr:hover { background: #f0f8ff; }
+        .btn { padding: 6px 14px; border-radius: 4px; text-decoration: none; font-size: 0.85rem; }
+        .btn-nuevo { background: #27ae60; color: white; display: inline-block; margin-bottom: 16px; }
+        .btn-editar { background: #f39c12; color: white; }
+        .btn-eliminar { background: #e74c3c; color: white; }
+        .mensaje { background: #d4edda; color: #155724; padding: 10px 16px; border-radius: 6px; margin-bottom: 16px; }
+    </style>
+</head>
+<body>
+
+    <h1>👨‍🎓 Lista de Aprendices</h1>
+
+    <div th:if="${mensaje}" class="mensaje" th:text="${mensaje}"></div>
+
+    <a href="/aprendices/nuevo" class="btn btn-nuevo">+ Nuevo Aprendiz</a>
+
+    <table>
+        <thead>
+            <tr>
+                <th>ID</th>
+                <th>Nombre</th>
+                <th>Correo</th>
+                <th>Programa</th>
+                <th>Ficha</th>
+                <th>Acciones</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr th:each="a : ${aprendices}">
+                <td th:text="${a.id}"></td>
+                <td th:text="${a.nombre}"></td>
+                <td th:text="${a.correo}"></td>
+                <td th:text="${a.programa}"></td>
+                <td th:text="${a.ficha}"></td>
+                <td>
+                    <a th:href="@{/aprendices/editar/{id}(id=${a.id})}" class="btn btn-editar">Editar</a>
+                    <a th:href="@{/aprendices/eliminar/{id}(id=${a.id})}" class="btn btn-eliminar"
+                       onclick="return confirm('¿Eliminar?')">Eliminar</a>
+                </td>
+            </tr>
+            <tr th:if="${#lists.isEmpty(aprendices)}">
+                <td colspan="6" style="text-align:center; color:#999; padding:20px;">
+                    No hay aprendices registrados aún.
+                </td>
+            </tr>
+        </tbody>
+    </table>
+
+</body>
+</html>

@@ -1,0 +1,25 @@
+spring:
+  application:
+    name: sis_academico
+
+  datasource:
+    url: jdbc:mysql://localhost:3306/sis_academico?useSSL=false&serverTimezone=UTC&allowPublicKeyRetrieval=true
+    username: root
+    password:
+    driver-class-name: com.mysql.cj.jdbc.Driver
+
+  jpa:
+    hibernate:
+      ddl-auto: update
+    show-sql: true
+    properties:
+      hibernate:
+        format_sql: true
+        dialect: org.hibernate.dialect.MySQLDialect
+
+  thymeleaf:
+    cache: false
+    encoding: UTF-8
+
+server:
+  port: 9090
