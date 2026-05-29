@@ -1,6 +1,6 @@
 package com.JuanD.sis_academico.controller;
 
-import com.JuanD.sis_academico.model.Aprendiz;
+import com.JuanD.sis_academico.dto.AprendizDTO;
 import com.JuanD.sis_academico.service.AprendizService;
 import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -25,18 +25,18 @@ public class AprendizController {
 
     @GetMapping("/nuevo")
     public String nuevo(Model model) {
-        model.addAttribute("aprendiz", new Aprendiz());
+        model.addAttribute("aprendiz", new AprendizDTO());
         return "aprendices/formulario";
     }
 
     @PostMapping("/guardar")
-    public String guardar(@Valid @ModelAttribute Aprendiz aprendiz,
+    public String guardar(@Valid @ModelAttribute AprendizDTO aprendizDTO,
                           BindingResult result,
                           RedirectAttributes flash) {
         if (result.hasErrors()) {
             return "aprendices/formulario";
         }
-        service.guardar(aprendiz);
+        service.guardar(aprendizDTO);
         flash.addFlashAttribute("mensaje", "Aprendiz guardado correctamente");
         return "redirect:/aprendices";
     }

@@ -1,21 +1,12 @@
-package com.JuanD.sis_academico.model;
+package com.JuanD.sis_academico.dto;
 
-import jakarta.persistence.*;
 import jakarta.validation.constraints.Email;
 import jakarta.validation.constraints.NotBlank;
-import lombok.AllArgsConstructor;
 import lombok.Data;
-import lombok.NoArgsConstructor;
 
-@Entity
-@Table(name = "aprendices")
 @Data
-@NoArgsConstructor
-@AllArgsConstructor
-public class Aprendiz {
+public class AprendizDTO {
 
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
     @NotBlank(message = "El nombre es obligatorio")
@@ -23,7 +14,6 @@ public class Aprendiz {
 
     @NotBlank(message = "El correo es obligatorio")
     @Email(message = "Correo no válido")
-    @Column(unique = true)
     private String correo;
 
     @NotBlank(message = "El programa es obligatorio")
